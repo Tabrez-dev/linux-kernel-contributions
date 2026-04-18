@@ -9,7 +9,7 @@ A central tracking repository for my upstream Linux kernel patches.
 
 | Date | Subsystem | Patch / Series | Status |
 | :--- | :--- | :--- | :--- |
-| **Apr 2026** | `hwmon` | [hwmon: (ads7871) Modernize and fix DMA safety](#) | Under Review (v3) |
+| **Apr 2026** | `hwmon` | [hwmon: (ads7871) Modernize and fix DMA safety](https://lore.kernel.org/linux-hwmon/20260418034601.90226-1-tabreztalks@gmail.com/) | Under Review (v3) |
 | **Early 2026** | `net/rds` | [rds: tcp: fix uninit-value in __inet_bind](https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net.git/commit/?id=7b821da55b3f) | Accepted |
 
 ---
