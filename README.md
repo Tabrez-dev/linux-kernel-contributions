@@ -20,13 +20,14 @@ A central tracking repository for my upstream Linux kernel patches. My work prim
 Below is a technical breakdown of how I approached, debugged, and authored these patches.
 
 ### 1. hwmon: ads7871 Modernization and Endianness Fix
-syzkall report: https://syzkaller.appspot.com/bug?extid=aae646f09192f72a68dc
+
 **Context:** The `ads7871` driver was using legacy sysfs macro boilerplate, lacked DMA-safe SPI buffers, and harbored a hidden bug affecting Big-Endian CPU architectures.
 
 * **Patch 1 (The Endianness Fix):** Discovered that the driver was using `spi_w8r16()` to read 16-bit sensor data. Because the ADS7871 transmits the Least Significant Byte (LSB) first, Big-Endian CPUs were byte-swapping the result natively, corrupting the voltage readings. I fixed this by dropping down to `spi_write_then_read()`, grabbing the raw bytes into a `u8` array, and explicitly reconstructing the integer using the `get_unaligned_le16()` macro to guarantee architecture-agnostic safety.
 * **Patch 2 (API Migration):** Ripped out the old, heavily-macroed `hwmon_device_register()` boilerplate and migrated the driver to the modern `hwmon_device_register_with_info()` API. This allowed me to declare the sensor's capabilities using clean, declarative `hwmon_channel_info` arrays.
 * **Patch 3 (DMA Safety):** The legacy code passed stack-allocated buffers to `spi_write()`. On modern systems with `CONFIG_VMAP_STACK` enabled, hardware DMA cannot safely access stack memory. I resolved this by moving the transmit buffer (`tx_buf[2]`) into the driver's dynamically allocated private data structure (`struct ads7871_data`) and ensuring it was `____cacheline_aligned`.
 ### 2. net/rds: tcp: fix uninit-value in __inet_bind (Commit `7b821da55b3f`)
+syzkall report: https://syzkaller.appspot.com/bug?extid=aae646f09192f72a68dc
 **Context:** Syzbot automated fuzzing caught an uninitialized memory access bug flagged by the Kernel Memory Sanitizer (KMSAN) during an RDS TCP socket binding. The bug had caused over 400 crashes in the upstream testing tree.
 
 * **Triage & Debugging Workflow:** * **Analyzing the KMSAN Report:** I examined the Syzkaller crash log, which provided three critical stack traces: 
