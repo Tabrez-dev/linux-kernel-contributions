@@ -4,8 +4,7 @@
 ![Focus](https://img.shields.io/badge/Focus-hwmon%20%7C%20net-blue)
 ![C](https://img.shields.io/badge/Language-C-A8B9CC?logo=c&logoColor=white)
 
-A central tracking repository for my upstream Linux kernel patches. My work primarily focuses on modernizing legacy drivers, fixing hardware-level bugs (like endianness and DMA safety), and resolving memory safety issues caught by sanitizers.
-
+A central tracking repository for my upstream Linux kernel patches.
 ## 📜 Patch Log
 
 | Date | Subsystem | Patch / Series | Status |
