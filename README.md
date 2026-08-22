@@ -5,7 +5,7 @@
 ![C](https://img.shields.io/badge/Language-C-A8B9CC?logo=c&logoColor=white)
 ![LKMP](https://img.shields.io/badge/LKMP-Spring_2026_Mentee-green)
 
-A central tracking repository for my upstream Linux kernel patches. Currently participating in the **Linux Kernel Mentorship Program (LKMP) Spring 2026** under mentors Shuah Khan and Brigham Campbell.
+A central tracking repository for my upstream Linux kernel patches. You can look here aswell: https://lore.kernel.org/all/?q=tabreztalks@gmail.com
 
 ---
 
